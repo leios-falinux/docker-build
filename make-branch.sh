@@ -81,7 +81,7 @@ fi
 CHIPSET_NAME_LOWER=$(echo ${CHIPSET_NAME} | tr '[:upper:]' '[:lower:]')
 CHIPSET_NAME_UPPER=$(echo ${CHIPSET_NAME} | tr '[:lower:]' '[:upper:]')
 
-git branch ${PROJECT_NAME_LOWER_UNDERBAR}
+git checkout -b ${PROJECT_NAME_LOWER_UNDERBAR}
 
 echo " [*] Rename files..."
 find . -type d -name *ricecooker* -exec rename "s/ricecooker/${PROJECT_NAME_LOWER_UNDERBAR}/g" {} \; 2>/dev/null
