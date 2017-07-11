@@ -20,7 +20,7 @@ echo ""
 echo "  FALINUX BSP"
 echo ""
 echo " 1) imx6"
-echo " 2) ez-zynq"
+echo " 2) zynq"
 echo " 3) ti"
 echo ""
 echo -n "SELECT: "
@@ -29,7 +29,7 @@ read PLATFORM_SELECTION
 
 case $PLATFORM_SELECTION in
     1)
-        PLATFORM=iem-imx6s
+        PLATFORM=plat-imx6
 	echo ""
 	echo " 1) imx6s"
 	echo " 2) imx6dl"
@@ -56,10 +56,10 @@ case $PLATFORM_SELECTION in
         ;;
     2)
 	CHIPSET_NAME=zynq
-        PLATFORM=ez-zynq
+        PLATFORM=plat-zynq
         ;;
     3)
-        PLATFORM=ti
+        PLATFORM=plat-ti
 	echo ""
 	echo " 1) am335x"
 	echo ""
@@ -107,4 +107,5 @@ sed -ri "s/falinux_chipset_name/${CHIPSET_NAME_LOWER}/g" ${FILE_LIST}
 sed -ri "s/FALINUX_CHIPSET_NAME/${CHIPSET_NAME_UPPER}/g" ${FILE_LIST}
 
 cd ..
-cp -Raf ${PLATFORM}/Dockerfile ${PLATFORM}/files .
+cp -Raf ${PLATFORM}/Dockerfile ${PLATFORM}/files ${PLATFORM}/install.sh ${PLATFORM}/runner .
+rm -Rf plat-*
