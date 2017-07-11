@@ -81,22 +81,30 @@ fi
 CHIPSET_NAME_LOWER=$(echo ${CHIPSET_NAME} | tr '[:upper:]' '[:lower:]')
 CHIPSET_NAME_UPPER=$(echo ${CHIPSET_NAME} | tr '[:lower:]' '[:upper:]')
 
+git clean -x -f -d .
+git checkout -- .
+git checkout master
 git checkout -b ${PROJECT_NAME_LOWER_UNDERBAR}
 
+cd ${PLATFORM}
+
 echo " [*] Rename files..."
-find . -type d -name *ricecooker* -exec rename "s/ricecooker/${PROJECT_NAME_LOWER_UNDERBAR}/g" {} \; 2>/dev/null
-find . -type f -name *ricecooker* -exec rename "s/ricecooker/${PROJECT_NAME_LOWER_UNDERBAR}/g" {} \; 2>/dev/null
-find . -type l -name *ricecooker* -exec rename "s/ricecooker/${PROJECT_NAME_LOWER_UNDERBAR}/g" {} \; 2>/dev/null
+find . -type d -name *falinux_board_name* -exec rename "s/falinux_board_name/${PROJECT_NAME_LOWER_UNDERBAR}/g" {} \; 2>/dev/null
+find . -type f -name *falinux_board_name* -exec rename "s/falinux_board_name/${PROJECT_NAME_LOWER_UNDERBAR}/g" {} \; 2>/dev/null
+find . -type l -name *falinux_board_name* -exec rename "s/falinux_board_name/${PROJECT_NAME_LOWER_UNDERBAR}/g" {} \; 2>/dev/null
 
 echo " [*] Replace files..."
 FILE_LIST=$(grep -lRIie "falinux[_-]board[_-]name" . 2>/dev/null)
 
-sed -ri "s/ricecooker/${PROJECT_NAME_LOWER_UNDERBAR}/g" ${FILE_LIST}
-sed -ri "s/RICECOOKER/${PROJECT_NAME_UPPER_UNDERBAR}/g" ${FILE_LIST}
-sed -ri "s/ricecooker/${PROJECT_NAME_LOWER_DASH}/g" ${FILE_LIST}
-sed -ri "s/RICECOOKER/${PROJECT_NAME_UPPER_DASH}/g" ${FILE_LIST}
+sed -ri "s/falinux_board_name/${PROJECT_NAME_LOWER_UNDERBAR}/g" ${FILE_LIST}
+sed -ri "s/FALINUX_BOARD_NAME/${PROJECT_NAME_UPPER_UNDERBAR}/g" ${FILE_LIST}
+sed -ri "s/falinux-board-name/${PROJECT_NAME_LOWER_DASH}/g" ${FILE_LIST}
+sed -ri "s/FALINUX-BOARD-NAME/${PROJECT_NAME_UPPER_DASH}/g" ${FILE_LIST}
 
-FILE_LIST=$(grep -lRIie "am335x" . 2>/dev/null)
+FILE_LIST=$(grep -lRIie "falinux_chipset_name" . 2>/dev/null)
 
-sed -ri "s/am335x/${CHIPSET_NAME_LOWER}/g" ${FILE_LIST}
-sed -ri "s/AM335X/${CHIPSET_NAME_UPPER}/g" ${FILE_LIST}
+sed -ri "s/falinux_chipset_name/${CHIPSET_NAME_LOWER}/g" ${FILE_LIST}
+sed -ri "s/FALINUX_CHIPSET_NAME/${CHIPSET_NAME_UPPER}/g" ${FILE_LIST}
+
+cd ..
+cp -Raf ${PLATFORM}/Dockerfile ${PLATFORM}/files .
