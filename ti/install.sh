@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PACKAGE_NAME=falinux_board_name
+PACKAGE_NAME=ricecooker
 
 echo "[*] Building docker image for ${PACKAGE_NAME}"
 docker build -t ${PACKAGE_NAME} .
