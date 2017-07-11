@@ -41,7 +41,7 @@ env KERNEL_DIR linux-imx6_3.14.28
 
 
 RUN curl -o- https://buildroot.uclibc.org/downloads/buildroot-${BUILDROOT_VERSION}.tar.gz | tar xz -C /tmp
-ADD files/* /tmp/buildroot-${BUILDROOT_VERSION}/
+ADD files/ /tmp/buildroot-${BUILDROOT_VERSION}/
 RUN \
     cd /tmp/buildroot-${BUILDROOT_VERSION} && \
     ./make.sh toolchain && \
