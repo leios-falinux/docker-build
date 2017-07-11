@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PACKAGE_NAME=bsp
+PACKAGE_NAME=falinux_board_name
 
 echo "[*] Building docker image for ${PACKAGE_NAME}"
 docker build -t ${PACKAGE_NAME} .
